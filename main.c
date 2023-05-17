@@ -182,6 +182,11 @@ int main(int BanyakArgumen, char *argumen[]) // ./main username passwword
     else
     {
         printf("PW SALAH!\n");
+        printf("Riwayat Akun!\n");
+        printf("Username %s\n", username);
+        printf("Password %s\n", password);
+        printf("%s ", argumen[1]);
+        printf("%s", argumen[2]);
 
     }
 
