@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 int main(int argc, char *argv[]) {
     char *username = argv[1];
     char *password = argv[2];
+    char *soal;
+    int jumlah_soal;
 
     buat_akun();
 
@@ -25,6 +28,9 @@ int main(int argc, char *argv[]) {
         printf("Login gagal. Gunakan: %s [username] [password]\n", argv[0]);
         return 1;
     }
+    
+    jalankan_permainan(&pertanyaan, jumlah);
+    
     return 0;
 }
 
@@ -66,3 +72,27 @@ int login(char* username, char* password) {
     fclose(fp);
     return 0; // Login gagal
 }
+
+void jalankan_permainan(Pertanyaan* pertanyaan, int jumlah) {
+    int poin = 0;
+    int i;
+    char jawaban[50];
+
+    printf("Selamat datang di game quiz!\n");
+
+    for (i = 0; i < jumlah; i++) {
+        printf("Pertanyaan %d: %s\n", i+1, pertanyaan[i].pertanyaan);
+        printf("Jawaban: ");
+        scanf("%s", jawaban);
+
+        for(int j = 0; (tolower(jawaban[j])) != '\0'; j++);
+        
+        if (strcmp(jawaban, pertanyaan[i].jawaban) == 0) {
+            printf("Jawaban benar!\n");
+            poin += 10;
+        } else {
+            printf("Jawaban salah!\n");
+        }
+
+        printf("\n");
+    }
