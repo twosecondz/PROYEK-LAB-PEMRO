@@ -20,3 +20,24 @@ int main()
     printf("%s", kata[y]);
     return 0;
 }
+void buat_akun() {
+    Account akun_baru;
+    FILE *fp = fopen("login.bin", "rb");
+
+    if (fp == NULL){
+        fp = fopen("login.bin", "wb");
+
+        // Meminta input username dan password baru dari pengguna
+        printf("Masukkan username: ");
+        scanf("%s", akun_baru.username);
+        printf("Masukkan password: ");
+        scanf("%s", akun_baru.password);
+
+        // Menulis data akun baru ke dalam file binary
+        fwrite(&akun_baru, sizeof(Account), 1, fp);
+
+        printf("Akun berhasil dibuat!\n");
+    }
+    fclose(fp);
+}
+
