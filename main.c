@@ -3,7 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) 
+{
     char *username = argv[1];
     char *password = argv[2];
     char *soal;
@@ -19,7 +20,8 @@ int main(int argc, char *argv[]) {
     }
 
     // Lakukan proses login
-    if (login(username, password)) {
+    if (login(username, password))
+    {
         printf("Login berhasil!\n");
 
         // Tampilkan menu dan jalankan game quiz
