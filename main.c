@@ -2,24 +2,32 @@
 #include <stdlib.h>
 #include <string.h>
 
-int main()
-{
-    char kalimat[20] = "ini adalah kalimat";
-    char *kata[10];
-    int i = 0;
+int main(int argc, char *argv[]) {
+    char* username = argv[1];
+    char* password = argv[2];
 
-    kata[0] = strtok(kalimat, " ");
+    buat_akun();
 
-    while (kata[i++] != NULL)
+    // Cek apakah terdapat CLA yang sesuai
+    if (argc != 3)
     {
-        // printf("%s \n", kata);
-        kata[i] = strtok(NULL, " ");
+        printf("Login gagal. Gunakan: %s [username] [password]\n", argv[0]);
+        return 1;
     }
 
-    int y = 0;
-    printf("%s", kata[y]);
-    return 0;
+    // Lakukan proses login
+    if (login(username, password)) {
+        printf("Login berhasil!\n");
+
+        // Tampilkan menu dan jalankan game quiz
+        printf("Selamat datang di game quiz!\n");
+    } else {
+        printf("Login gagal. Gunakan: %s [username] [password]\n", argv[0]);
+        return 1;
+    }
+    return 0;
 }
+
 void buat_akun() {
     Account akun_baru;
     FILE *fp = fopen("login.bin", "rb");
