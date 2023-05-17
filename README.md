@@ -5,8 +5,8 @@ Adapula project yang kami buat yaitu membuat quiz dimana user harus melakukan lo
 Setelah membuat akun, user dapat login dengan menggunakan CLA dengan format ./file_name acc_name Password
 
 KELOMPOK:
-1. M. Syahidal Akbar Zas (2208107010045) : twosecondz
-2. Nashed Bayazid Ali (2208107010049 : NashedAli
-3. Hidayat Nur Hakim (22081070100 : HidayatNurHakim
-4. Willy Joanthan (22081070100 : Giant77
-5. Raihan : raihan0504
+1. M. Syahidal Akbar Zas (2208107010045)  : twosecondz
+2. Nashed Bayazid Ali (22081070100        : NashedAli
+3. Hidayat Nur Hakim (2208107010063)      : HidayatNurHakim
+4. Willy Jonathan Arsyad(2208107010037)   : Giant77
+5. Muhammad Raihan (2208107010021)        : raihan0504
