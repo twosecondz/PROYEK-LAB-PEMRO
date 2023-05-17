@@ -1,22 +1,22 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 int main()
 {
-   FILE *fpw = fopen("database/login.bin", "wb");
-    char id[20];
-    char pw[20];
-    printf("Registrasi\n");
-    printf("Masukan id: ");
-    scanf("%s", id);
+    char kalimat[20] = "ini adalah kalimat";
+    char *kata[10];
+    int i = 0;
 
-    printf("Masukan pw: ");
-    scanf("%s", pw);
-    fprintf(fpw, "%s", id);
+    kata[0] = strtok(kalimat, " ");
 
-    fprintf(fpw, " ");
-    fprintf(fpw, "%s", pw);
+    while (kata[i++] != NULL)
+    {
+        // printf("%s \n", kata);
+        kata[i] = strtok(NULL, " ");
+    }
 
-    fclose(fpw);
-
-        return 0;
+    int y = 0;
+    printf("%s", kata[y]);
+    return 0;
 }
