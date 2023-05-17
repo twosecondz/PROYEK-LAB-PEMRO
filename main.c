@@ -25,9 +25,9 @@ int main(int argc, char *argv[])
         printf("Login berhasil!\n");
 
         // Tampilkan menu dan jalankan game quiz
-        printf("Selamat datang di game quiz!\n");
+        printf("Selamat datang di quiz!\n");
     } else {
-        printf("Login gagal. Gunakan: %s [username] [password]\n", argv[0]);
+        printf("Login tidak berhasil. Gunakan: %s [username] [password]\n", argv[0]);
         return 1;
     }
     
