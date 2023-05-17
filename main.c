@@ -1,100 +1,189 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 
-int main(int argc, char *argv[]) 
+void tampilkanPertanyaan(const char *pertanyaan, const char *opsiA, const char *opsiB, const char *opsiC, const char *opsiD)
 {
-    char *username = argv[1];
-    char *password = argv[2];
-    char *soal;
-    int jumlah_soal;
+    printf("==========================================\n");
+    printf("%s\n", pertanyaan);
+    printf("A. %s\n", opsiA);
+    printf("B. %s\n", opsiB);
+    printf("C. %s\n", opsiC);
+    printf("D. %s\n", opsiD);
+    printf("==========================================\n");
+}
 
-    buat_akun();
+void menu()
+{
+    char jawaban[10];
+    int skor = 0;
 
-    // Cek apakah terdapat CLA yang sesuai
-    if (argc != 3)
+    // Pertanyaan 1
+    tampilkanPertanyaan("Siapakah presiden Indonesia yang pertama?", "Soekarno", "Soeharto", "Joko Widodo", "Abdurrahman Wahid");
+    printf("Jawaban Anda (A/B/C/D): ");
+    scanf("%s", jawaban);
+    if (strcmp(jawaban, "A") == 0 || strcmp(jawaban, "a") == 0)
     {
-        printf("Login gagal. Gunakan: %s [username] [password]\n", argv[0]);
+        skor += 100;
+        printf("Jawaban Anda benar!\n");
+    }
+    else
+    {
+        printf("Jawaban Anda salah!\n");
+    }
+    printf("==========================================\n");
+
+    // Pertanyaan 2
+    tampilkanPertanyaan("Berapa jumlah provinsi di Indonesia saat ini?", "30", "32", "34", "36");
+    printf("Jawaban Anda (A/B/C/D): ");
+    scanf("%s", jawaban);
+    if (strcmp(jawaban, "C") == 0 || strcmp(jawaban, "c") == 0)
+    {
+        skor += 100;
+        printf("Jawaban Anda benar!\n");
+    }
+    else
+    {
+        printf("Jawaban Anda salah!\n");
+    }
+    printf("==========================================\n");
+
+    // Pertanyaan 3
+    tampilkanPertanyaan("Apa ibu kota Indonesia?", "Jakarta", "Bandung", "Surabaya", "Yogyakarta");
+    printf("Jawaban Anda (A/B/C/D): ");
+    scanf("%s", jawaban);
+    if (strcmp(jawaban, "A") == 0 || strcmp(jawaban, "a") == 0)
+    {
+        skor += 100;
+        printf("Jawaban Anda benar!\n");
+    }
+    else
+    {
+        printf("Jawaban Anda salah!\n");
+    }
+    printf("==========================================\n");
+
+    // Pertanyaan 4
+    tampilkanPertanyaan("Apa nama mata uang resmi Indonesia?", "Rupiah", "Dinar", "Euro", "Yen");
+    printf("Jawaban Anda (A/B/C/D): ");
+    scanf("%s", jawaban);
+    if (strcmp(jawaban, "A") == 0 || strcmp(jawaban, "a") == 0)
+    {
+        skor += 100;
+        printf("Jawaban Anda benar!\n");
+    }
+    else
+    {
+        printf("Jawaban Anda salah!\n");
+    }
+    printf("==========================================\n");
+
+    // Pertanyaan 5
+    tampilkanPertanyaan("Nama siapa yang terkenal dalam dunia musik Indonesia dengan lagu 'Pergi Pagi Pulang Pagi'?", "Raisa", "Tulus", "Judika", "Armada");
+    printf("Jawaban Anda (A/B/C/D): ");
+    scanf("%s", jawaban);
+    if (strcmp(jawaban, "D") == 0 || strcmp(jawaban, "d") == 0)
+    {
+        skor += 100;
+        printf("Jawaban Anda benar!\n");
+    }
+    else
+    {
+        printf("Jawaban Anda salah!\n");
+    }
+    printf("==========================================\n");
+    printf("Skor Anda: %d\n", skor);
+}
+
+int main(int BanyakArgumen, char *argumen[]) // ./main username passwword
+{
+    if (BanyakArgumen != 3)
+    {
+
+        printf("\n Cara penggunaan : ./(namafile) username password\n");
+
+        return EXIT_FAILURE;
+    }
+
+    char usernameinput[10], passwordinput[10];
+    // argumen[1] = "qwertyuiopasdfH";
+    // argumen[2] = "WIKWOKasdjnhb";
+    strcpy(usernameinput, argumen[1]);
+    strcpy(passwordinput, argumen[2]);
+
+    FILE *fpr = fopen("database/login.bin", "rb");
+    char akun[20];
+
+    if (fpr == NULL)
+    {
+        printf("Gagal membuka file.\n");
         return 1;
     }
 
-    // Lakukan proses login 
-    if (login(username, password))
+    // Cek apakah file kosong
+    fseek(fpr, 0, SEEK_END);
+    if (ftell(fpr) == 0)
     {
-        printf("Login berhasil!\n");
+        printf("================================================================\n");
+        printf("\tGagal login, Silahkan registrasi terlebih dahulu!\n");
+        printf("================================================================\n");
 
-        // Tampilkan menu dan jalankan game quiz
-        printf("Selamat datang di quiz!\n");
-    } else {
-        printf("Login tidak berhasil. Gunakan: %s [username] [password]\n", argv[0]);
-        return 1;
+        FILE *fpw = fopen("database/login.bin", "wb");
+        char id[20];
+        char pw[20];
+        printf("Registrasi\n");
+        printf("Masukan id: ");
+        scanf("%s", id);
+
+        printf("Masukan pw: ");
+        scanf("%s", pw);
+        fprintf(fpw, "%s", id);
+
+        fprintf(fpw, " ");
+        fprintf(fpw, "%s", pw);
+
+        fprintf(fpw, "\0"); // Menambahkan karakter nul di akhir data
+
+        fclose(fpw);
+
+        return EXIT_FAILURE;
     }
-    
-    jalankan_permainan(&pertanyaan, jumlah);
-    
+
+    if ((fpr = fopen("database/login.bin", "rb")) == NULL)
+    {
+        printf("Gagal membuka file!");
+
+        return EXIT_FAILURE;
+    }
+
+    fread(akun, sizeof(char), sizeof(akun) / sizeof(char), fpr);
+
+    fclose(fpr);
+
+    char *string[3];
+    char username[20], password[20];
+    int ctrl = 0;
+
+    string[0] = strtok(akun, " ");
+
+    while (string[ctrl++] != NULL)
+    {
+        string[ctrl] = strtok(NULL, " ");
+    }
+
+    strcpy(username, string[0]);
+    strcpy(password, string[1]);
+
+    if (strcmp(usernameinput, username) == 0 && strcmp(usernameinput, username) == 0)
+    {
+        printf("Login Berhasil!\n");
+        menu();
+    }
+    else
+    {
+        printf("PW SALAH!\n");
+
+    }
+
     return 0;
 }
-
-void buat_akun() {
-    Account akun_baru;
-    FILE *fpw = fopen("login.bin", "rb");
-
-    if (fp == NULL){
-        fp = fopen("database/login.bin", "wb");
-
-        // Meminta input username dan password baru dari pengguna
-        printf("Masukkan username: ");
-        scanf("%s", akun_baru.username);
-        printf("Masukkan password: ");
-        scanf("%s", akun_baru.password);
-
-        // Menulis data akun baru ke dalam file binary
-        fwrite(&akun_baru, sizeof(Account), 1, fp);
-
-        printf("Akun berhasil dibuat!\n");
-    }
-    fclose(fp);
-}
-
-int login(char* username, char* password) {
-    Account akun;
-    FILE *fp = fopen("database/login.bin", "rb");
-
-    // Membaca data akun dari file binary dan membandingkan dengan input username dan password
-    while (fread(&akun, sizeof(Account), 1, fp)) {
-        if (strcmp(akun.username, username) == 0 && strcmp(akun.password, password) == 0) {
-            fclose(fp);
-            return 1; // Login berhasil
-        } else {
-            printf("Username dan Sandi yang anda inputkan salah!!\n");
-        }
-    }
-
-    fclose(fp);
-    return 0; // Login anda gagal
-}
-
-void jalankan_permainan(Pertanyaan* pertanyaan, int jumlah) {
-    int poin = 0;
-    int i;
-    char jawaban[50];
-
-    printf("Selamat datang di game quiz!\n");
-
-    for (i = 0; i < jumlah; i++) {
-        printf("Pertanyaan %d: %s\n", i+1, pertanyaan[i].pertanyaan);
-        printf("Jawaban: ");
-        scanf("%s", jawaban);
-
-        for(int j = 0; (tolower(jawaban[j])) != '\0'; j++);
-        
-        if (strcmp(jawaban, pertanyaan[i].jawaban) == 0) {
-            printf("Jawaban benar!\n");
-            poin += 10;
-        } else {
-            printf("Jawaban salah!\n");
-        }
-
-        printf("\n");
-    }
