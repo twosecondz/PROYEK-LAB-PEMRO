@@ -72,7 +72,7 @@ int login(char* username, char* password) {
     }
 
     fclose(fp);
-    return 0; // Login gagal
+    return 0; // Login anda gagal
 }
 
 void jalankan_permainan(Pertanyaan* pertanyaan, int jumlah) {
