@@ -41,3 +41,20 @@ void buat_akun() {
     fclose(fp);
 }
 
+int login(char* username, char* password) {
+    Account akun;
+    FILE *fp = fopen("login.bin", "rb");
+
+    // Membaca data akun dari file binary dan membandingkan dengan input username dan password
+    while (fread(&akun, sizeof(Account), 1, fp)) {
+        if (strcmp(akun.username, username) == 0 && strcmp(akun.password, password) == 0) {
+            fclose(fp);
+            return 1; // Login berhasil
+        } else {
+            printf("Username dan Sandi yang anda inputkan salah!!\n");
+        }
+    }
+
+    fclose(fp);
+    return 0; // Login gagal
+}
